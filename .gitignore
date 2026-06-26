@@ -1,0 +1,7 @@
+# Ignore task checklist PDF
+Frontend Development Tasks & Instructions — CodeAlpha M1.pdf
+extract.ps1
+extract_resume.py
+read_pdf.py
+*.py
+*.ps1
