@@ -197,6 +197,7 @@ button {
    4. LAYOUT & GRID UTILITIES
    -------------------------------------------------------------------------- */
 .header-container,
+.hero-container,
 .section-container,
 .footer-container {
     max-width: 1280px;
@@ -206,6 +207,7 @@ button {
 
 @media (max-width: 768px) {
     .header-container,
+    .hero-container,
     .section-container,
     .footer-container {
         padding: 0 24px;
@@ -1199,8 +1201,9 @@ html[data-theme="light"] .moon-icon { display: block; }
     background-color: var(--bg-secondary);
     border: 1px solid var(--border-color);
     padding: 48px;
-    border-radius: 2px;
+    border-radius: 4px;
     box-shadow: var(--card-shadow);
+    transition: var(--transition-smooth);
 }
 
 @media (max-width: 576px) {
@@ -1215,72 +1218,114 @@ html[data-theme="light"] .moon-icon { display: block; }
 
 .form-group {
     position: relative;
-    margin-bottom: 40px;
+    margin-bottom: 28px;
 }
 
 .form-input {
     width: 100%;
-    background-color: var(--input-bg);
-    border: none;
-    border-bottom: 1px solid var(--border-color);
-    padding: 12px 0;
+    background-color: rgba(255, 255, 255, 0.015);
+    border: 1px solid var(--border-color);
+    padding: 16px 18px;
     color: var(--text-primary);
     font-family: var(--font-sans);
     font-size: 0.95rem;
-    transition: var(--transition-fast);
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+}
+
+/* Light theme adjustment */
+html[data-theme="light"] .form-input {
+    background-color: rgba(0, 0, 0, 0.015);
 }
 
 .form-input:focus {
     outline: none;
-    border-bottom-color: var(--accent-color);
+    border-color: var(--accent-color);
+    background-color: rgba(var(--accent-rgb), 0.02);
+    box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.12);
 }
 
 .form-textarea {
-    min-height: 120px;
+    min-height: 140px;
     resize: vertical;
 }
 
 /* Floating Labels */
 .form-label {
     position: absolute;
-    top: 12px;
-    left: 0;
+    top: 16px;
+    left: 18px;
     color: var(--text-tertiary);
     font-size: 0.95rem;
     pointer-events: none;
-    transition: var(--transition-fast);
+    transition: var(--transition-smooth);
+    background-color: transparent;
 }
 
 /* Form floating trigger states */
 .form-input:focus ~ .form-label,
+.form-input:not(:placeholder-shown) ~ .form-label,
+.form-group.invalid .form-label {
+    top: -9px;
+    left: 14px;
+    font-size: 0.72rem;
+    padding: 0 6px;
+    background-color: var(--bg-secondary);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
 .form-input:not(:placeholder-shown) ~ .form-label {
-    top: -12px;
-    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.form-input:focus ~ .form-label {
     color: var(--accent-color);
+}
+
+.form-group.invalid .form-label {
+    color: #da6b6b;
 }
 
 /* Error States */
 .form-error {
+    display: block;
     font-size: 0.75rem;
-    color: #e57373;
-    position: absolute;
-    bottom: -18px;
-    left: 0;
+    color: #da6b6b;
+    margin-top: 0;
+    max-height: 0;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease, transform 0.3s ease;
+    transform: translateY(-5px);
     pointer-events: none;
+    margin-left: 4px;
 }
 
 .form-group.invalid .form-input {
-    border-bottom-color: #e57373;
+    border-color: #da6b6b;
+}
+
+.form-group.invalid .form-input:focus {
+    box-shadow: 0 0 0 4px rgba(218, 107, 107, 0.15);
+    background-color: rgba(218, 107, 107, 0.01);
+}
+
+.form-group.invalid .form-label {
+    color: #da6b6b;
 }
 
 .form-group.invalid .form-error {
+    margin-top: 8px;
+    max-height: 24px;
     opacity: 1;
+    transform: translateY(0);
 }
 
 .btn-submit {
     width: 100%;
+    margin-top: 8px;
 }
 
 /* Success Cues (Elegant Bottom-Right Toast Alert) */
